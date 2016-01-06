@@ -1,0 +1,43 @@
+<form role="form">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="name" class="control-label">Name</label>
+				<input type="text" ng-model="dept.name" class="form-control" id="name" placeholder="Enter the dept name">
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="spell" class="control-label">Spell</label>
+				<input type="text" ng-model="dept.spell" class="form-control" id="spell" placeholder="Enter the dept spell">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+		      <label for="parent" class="control-label">Parent</label>
+		      <select id="parent" class="form-control" ng-model="dept.parent">
+		        <option value="">--</option>
+		        <option value="{{dept._id}}" ng-repeat="dept in depts" ng-selectd="dept.parent">{{dept.name}}</option>
+		      </select>
+		    </div>
+		</div>
+	</div>
+
+<!--
+    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+    <div class="row">
+		<div class="col-md-4">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+-->
+	<input type="submit" class="btn btn-primary" ng-click="saveDept()" value="save">
+</form>
