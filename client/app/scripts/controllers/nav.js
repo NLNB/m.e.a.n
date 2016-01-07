@@ -10,13 +10,14 @@
 angular.module('clientApp')
   .controller('NavCtrl', ['$scope', '$browser', '$location', function ($scope, $browser, $location) {
 
-  	$scope.isCollapsed = false;
-  	$scope.toggleCollapsibleMenu = function(){
-		$scope.isCollapsed = true;
-  	};
+  	//$scope.isCollapsed = false;
+  	//$scope.toggleCollapsibleMenu = function(){
+	//	$scope.isCollapsed = true;
+  	//};
 
-  	//$scope.$on('$locationChangeSuccess', function () {
-  	//	$scope.isCollapsed = !$scope.isCollapsed;
-    //});
+  	$scope.$on('$locationChangeSuccess', function () {
+  		angular.element('#navBtn').click();
+  		console.log();
+    });
 
   }]);
