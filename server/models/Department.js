@@ -10,8 +10,8 @@ var DepartmentSchema = new mongoose.Schema({
 		required: true
 	},
 	parent:{
-		type: String,
-		required: false
+		type: mongoose.Schema.ObjectId,
+		ref: 'DepartmentSchema'
 	}
 });
 

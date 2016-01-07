@@ -14,7 +14,6 @@ angular.module('clientApp')
     $scope.maxSize = 5;
     $scope.bigTotalItems = 175;
     $scope.bigCurrentPage = 1;
-    console.log(Dept);
     $scope.depts = Dept.getList().$object;
 
   })
