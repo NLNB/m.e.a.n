@@ -16,8 +16,8 @@ angular.module('clientApp')
   	//};
 
   	$scope.$on('$locationChangeSuccess', function () {
-  		angular.element('#navBtn').click();
-  		console.log();
+  		//angular.element('#navBtn').click();
+  		//console.log();
     });
 
   }]);

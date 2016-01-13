@@ -9,12 +9,24 @@
  */
 angular.module('clientApp')
   .controller('DeptsCtrl', function ($scope, Dept) {
-
-    $scope.numPages = 20;
-    $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
+    $scope.maxSize = 10;
     $scope.bigCurrentPage = 1;
-    $scope.depts = Dept.getList().$object;
+
+    $scope.itemsPerPage = 25;
+
+    Dept.getList().then(function(data){
+      $scope.bigTotalItems = data.length;
+      $scope.numPages = data.length/$scope.itemsPerPage;
+      $scope.all = data;
+
+      $scope.depts = data.slice(($scope.bigCurrentPage-1)*$scope.itemsPerPage, $scope.bigCurrentPage*$scope.itemsPerPage);
+    });
+  })
+  .controller('DeptsPageCtrl', function ($scope) {
+
+    $scope.pageChange = function(){
+      $scope.depts = $scope.all.slice(($scope.bigCurrentPage-1)*25, $scope.bigCurrentPage*25);
+    };
 
   })
   .controller('DeptAddCtrl', function ($scope, Dept, $location) {

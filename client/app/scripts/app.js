@@ -87,7 +87,7 @@ angular
     return MovieRestangular.service('movie');
   })
   .factory('DeptRestangular', function(Restangular){
-    Restangular.setDefaultRequestParams('get', {limit: 20});
+    //Restangular.setDefaultRequestParams('get', {limit: 20});
 
     return Restangular.withConfig(function(RestangularConfigurer){
       RestangularConfigurer.setRestangularFields({
