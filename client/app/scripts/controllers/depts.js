@@ -20,6 +20,9 @@ angular.module('clientApp')
       $scope.all = data;
 
       $scope.depts = data.slice(($scope.bigCurrentPage-1)*$scope.itemsPerPage, $scope.bigCurrentPage*$scope.itemsPerPage);
+
+
+      toastr.success("Dept List View !","wangqiang");
     });
   })
   .controller('DeptsPageCtrl', function ($scope) {
