@@ -122,6 +122,6 @@ angular
     toastr.options.timeOut = 4000;
     toastr.options.showMethod = 'slideDown';
     toastr.options.positionClass = 'toast-bottom-right';
-    toastr.options.progressBar = true;
+    toastr.options.progressBar = false;
   })
   .constant('toastr', toastr);

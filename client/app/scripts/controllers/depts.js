@@ -32,8 +32,16 @@ angular.module('clientApp')
       $uibModal.open({
         animation: true,
         templateUrl: 'views/dept-del-modal.html',
-        controller: '',
-        size: size
+        controller: 'ModalInstanceCtrl',
+        size: size,
+        resolve: {
+          dept: function () {
+            return $scope.dept;
+          },
+          wq:function(){
+            return 'wangqiang';
+          }
+        }
       });
 
       
@@ -99,4 +107,15 @@ angular.module('clientApp')
     ];
 
     toastr.info("Dept Tree View !");
+  })
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, dept) {
+    $scope.dept = dept;
+
+    $scope.ok = function () {
+      $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
   });
