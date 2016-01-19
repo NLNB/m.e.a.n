@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('DeptsCtrl', function ($scope, Dept) {
+  .controller('DeptsCtrl', function ($scope, Dept, $uibModal) {
     $scope.maxSize = 10;
     $scope.bigCurrentPage = 1;
 
@@ -21,14 +21,30 @@ angular.module('clientApp')
 
       $scope.depts = data.slice(($scope.bigCurrentPage-1)*$scope.itemsPerPage, $scope.bigCurrentPage*$scope.itemsPerPage);
 
-
-      toastr.success("Dept List View !","wangqiang");
+      toastr.info("Dept List View !");
     });
+
+
+    $scope.open = function (size, id) {
+
+      $scope.dept = Dept.one(id).get().$object;
+
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'views/dept-del-modal.html',
+        controller: '',
+        size: size
+      });
+
+      
+    };
+
   })
   .controller('DeptsPageCtrl', function ($scope) {
 
     $scope.pageChange = function(){
       $scope.depts = $scope.all.slice(($scope.bigCurrentPage-1)*25, $scope.bigCurrentPage*25);
+      //toastr.info("Dept List View !");
     };
 
   })
@@ -40,14 +56,19 @@ angular.module('clientApp')
         $location.path('/depts');
       });
     };
+
+    toastr.info("Dept Create View !");
   })
   .controller('DeptDeleteCtrl', function ($scope, $routeParams, Dept, $location) {
     $scope.dept = Dept.one($routeParams.id).get().$object;
+
     $scope.deleteDept = function(){
       $scope.dept.remove().then(function(){
+        toastr.info("Dept Delete Success !");
         $location.path('/depts');
       });
     };
+
     $scope.back = function(){
       $location.path('/dept/' + $routeParams.id);
     };
@@ -76,4 +97,6 @@ angular.module('clientApp')
       'AngularJS',
       'Karma'
     ];
+
+    toastr.info("Dept Tree View !");
   });
