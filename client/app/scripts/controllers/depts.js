@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('DeptsCtrl', function ($scope, Dept, $uibModal) {
+  .controller('DeptsCtrl', function ($scope, Dept, $uibModal, $location) {
     $scope.maxSize = 10;
     $scope.bigCurrentPage = 1;
 
@@ -29,22 +29,30 @@ angular.module('clientApp')
 
       $scope.dept = Dept.one(id).get().$object;
 
-      $uibModal.open({
+      var modalInstance = $uibModal.open({
         animation: true,
+        backdrop: 'static',
         templateUrl: 'views/dept-del-modal.html',
         controller: 'ModalInstanceCtrl',
+        keyboard: false,
         size: size,
         resolve: {
           dept: function () {
             return $scope.dept;
-          },
-          wq:function(){
-            return 'wangqiang';
           }
         }
       });
 
-      
+      modalInstance.result.then(function (dept) {
+        dept.remove().then(function(){
+          
+          toastr.info("Dept "+ dept.name +" Delete Success !");
+          $location.path('/depts');
+          
+        });
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
     };
 
   })
@@ -112,7 +120,7 @@ angular.module('clientApp')
     $scope.dept = dept;
 
     $scope.ok = function () {
-      $uibModalInstance.close($scope.selected.item);
+      $uibModalInstance.close($scope.dept);
     };
 
     $scope.cancel = function () {
